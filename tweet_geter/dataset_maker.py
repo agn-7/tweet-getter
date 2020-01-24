@@ -3,8 +3,6 @@ import pandas as pd
 
 from tqdm import tqdm
 
-from utility.utility import print_progress_bar
-
 __author__ = 'aGn'
 
 API_KEY = "UL3Q8hMA74wRB5RykuCnCJxkm"
