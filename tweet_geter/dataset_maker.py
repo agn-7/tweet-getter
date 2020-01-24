@@ -17,7 +17,26 @@ api = tweepy.API(auth)
 
 def get_tweet(id_):
     tweet = api.get_status(id_)
-    return tweet.text
+    tweet_text = remove_symbol(tweet.text, '#')
+
+    return tweet_text
+
+
+def remove_symbol(text, *symbols):
+    """
+    Remove entered symbols from text.
+    :param text: Text
+    :param symbols: forbidden symbols.
+    :return: Text without entered symbols.
+    """
+    entity_prefixes = symbols
+    words = []
+    for word in text.split():
+        word = word.strip()
+        if word:
+            if word[0] not in entity_prefixes:
+                words.append(word)
+    return ' '.join(words)
 
 
 def clean_data():
@@ -30,10 +49,11 @@ def clean_data():
     return cleaned_df
 
 
-def create_dataset():
+def prepare_dataset():
     data = clean_data()
     progress = data.shape[0]
-    pbar = tqdm(total=progress)
+    progress_bar = tqdm(total=progress)
+    missing_tweets = 0
 
     with open('dataset/dataset.txt', mode='a') as file_:
         for i, row in data.iterrows():
@@ -42,11 +62,13 @@ def create_dataset():
             try:
                 file_.write(f"{id_} {get_tweet(id_)} {emotion_}")
                 file_.write("\n")
-                pbar.update()
+                progress_bar.update()
             except Exception as exp:
                 print(exp)
+                missing_tweets -=- 1
 
-    pbar.close()
+    print(f"We missed {missing_tweets} of tweets.")
+    progress_bar.close()
 
 
-create_dataset()  # TODO
+prepare_dataset()  # TODO
