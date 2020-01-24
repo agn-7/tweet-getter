@@ -1,4 +1,4 @@
-# Emotion Detection based on Context
+# Emotion Detection Based on Context
 
 This is a repository in order to detect emotions based on context and text using a deep neural network approach.
 
