@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 __author__ = 'aGn'
 
-API_KEY = "UL3Q8hMA74wRB5RykuCnCJxkm"
+API_KEY = "UL3Q8hMA74wRB5RykuCnCJxkm"  # TODO :: Make them parametric.
 API_SECRET = "WJuehel0rp0wPq8T2MdULr3Hxb21DSZfZXI94oqkV6U0zz00Db"
 ACCESS_TOKEN = "1970308164-GCFz3fDbgt95gs9VkbtHi0yzhTN9f8FjfbE2Ciw"
 ACCESS_TOKEN_SECRET = "jZ1KL5BbHlqIEsM4qSqN2fmvu0vN4cIay2vQxy9mE6xgP"
@@ -67,15 +67,15 @@ def clean_data(start=None, end=None):
     return cleaned_df
 
 
-def prepare_dataset(chunked_start=None, chunked_end=None):
+def prepare_dataset(*args, **kwargs):
     """
     Preparing dataset through getting tweets per IDs and apply hashtag remover pre-process on it.
-    :param chunked_start: Start point of row to read the IDs.
-    :param chunked_end: End point of row to read the IDs.
     :return:
     """
-    if chunked_start is not None:
-        data = clean_data(chunked_start, chunked_end)
+    chunked_start = kwargs.get('chunked_start', None)
+    chunked_end = kwargs.get('chunked_end', None)
+
+    data = clean_data(chunked_start, chunked_end)
     progress = data.shape[0]
     progress_bar = tqdm(total=progress)
     missing_tweets = 0
@@ -94,3 +94,11 @@ def prepare_dataset(chunked_start=None, chunked_end=None):
 
     print(f"We missed {missing_tweets} of tweets.")
     progress_bar.close()
+
+
+if __name__ == '__main__':  # TODO :: Temporarily
+    from configuration.configs import DATA_PREPARATION
+    from easydict import EasyDict as edict
+
+    params = edict(DATA_PREPARATION)
+    prepare_dataset(params.chunked_start, params.chunked_end)
