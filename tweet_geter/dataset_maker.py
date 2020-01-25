@@ -16,6 +16,11 @@ api = tweepy.API(auth)
 
 
 def get_tweet(id_):
+    """
+    Get tweet through its ID using tweepy library.
+    :param id_: tweet's ID.
+    :return: tweet text.
+    """
     tweet = api.get_status(id_)
     tweet_text = remove_symbol(tweet.text, '#')
 
@@ -39,23 +44,43 @@ def remove_symbol(text, *symbols):
     return ' '.join(words)
 
 
-def clean_data():
+def clean_data(start=None, end=None):
+    """
+    Read raw data and clean it.
+    :param start: Start point of row.
+    :param end: End point of row.
+    :return: cleaned data.
+    """
     df = pd.read_csv('dataset/tweetIds.csv')
-    print("Shape before clean: ", df.shape)
 
+    if start is not None:
+        if end is not None:
+            df = df.iloc[start:end, :]
+        else:
+            '''Start to the End of file'''
+            df = df.iloc[start:, :]
+
+    print("Shape before clean: ", df.shape)
     cleaned_df = df.dropna(how='any', axis=0)
     print("Shape after clean: ", cleaned_df.shape)
 
     return cleaned_df
 
 
-def prepare_dataset():
-    data = clean_data()
+def prepare_dataset(chunked_start=None, chunked_end=None):
+    """
+    Preparing dataset through getting tweets per IDs and apply hashtag remover pre-process on it.
+    :param chunked_start: Start point of row to read the IDs.
+    :param chunked_end: End point of row to read the IDs.
+    :return:
+    """
+    if chunked_start is not None:
+        data = clean_data(chunked_start, chunked_end)
     progress = data.shape[0]
     progress_bar = tqdm(total=progress)
     missing_tweets = 0
 
-    with open('dataset/dataset.txt', mode='a') as file_:
+    with open('dataset/dataset2.txt', mode='a') as file_:
         for i, row in data.iterrows():
             id_ = row.iloc[0]
             emotion_ = row.iloc[1]
@@ -69,6 +94,3 @@ def prepare_dataset():
 
     print(f"We missed {missing_tweets} of tweets.")
     progress_bar.close()
-
-
-prepare_dataset()  # TODO
