@@ -1,5 +1,6 @@
 import tweepy
 import pandas as pd
+import sys
 
 from tqdm import tqdm
 
@@ -54,7 +55,7 @@ def clean_data(start=None, end=None):
     df = pd.read_csv('dataset/tweetIds.csv')
 
     if start is not None:
-        if end is not None:
+        if end is not None and end != 'end':
             df = df.iloc[start:end, :]
         else:
             '''Start to the End of file'''
@@ -74,16 +75,14 @@ def prepare_dataset(*args, **kwargs):
     """
     chunked_start = kwargs.get('chunked_start', None)
     chunked_end = kwargs.get('chunked_end', None)
+    print(f"Start from {chunked_start} to {chunked_end}")
 
     '''Generating Postfix.'''
+    _start, _end = 0, 'end'
     if chunked_start is not None:
         _start = chunked_start
-        if chunked_end is not None:
-            _end = chunked_end
-        else:
-            _end = 'end'
-    else:
-        _start, _end = 0, 'end'
+    if chunked_end is not None:
+        _end = chunked_end
 
     data = clean_data(chunked_start, chunked_end)
     progress = data.shape[0]
@@ -98,6 +97,8 @@ def prepare_dataset(*args, **kwargs):
                 file_.write(f"{id_} {get_tweet(id_)} {emotion_}")
                 file_.write("\n")
                 progress_bar.update()
+            except KeyboardInterrupt:
+                sys.exit(0)
             except Exception as exp:
                 print(exp)
                 missing_tweets -=- 1
@@ -111,4 +112,6 @@ if __name__ == '__main__':  # TODO :: Temporarily
     from easydict import EasyDict as edict
 
     params = edict(DATA_PREPARATION)
-    prepare_dataset(params.chunked_start, params.chunked_end)
+    prepare_dataset(
+        chunked_start=params.chunked_start,
+        chunked_end=params.chunked_end)
