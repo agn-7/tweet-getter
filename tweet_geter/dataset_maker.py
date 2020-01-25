@@ -111,7 +111,12 @@ if __name__ == '__main__':  # TODO :: Temporarily
     from configuration.configs import DATA_PREPARATION
     from easydict import EasyDict as edict
 
-    params = edict(DATA_PREPARATION)
-    prepare_dataset(
-        chunked_start=params.chunked_start,
-        chunked_end=params.chunked_end)
+    if len(sys.argv) == 3:
+        start = int(sys.argv[1])
+        end = int(sys.argv[2])
+    else:
+        params = edict(DATA_PREPARATION)
+        start = int(params.chunked_start)
+        end = int(params.chunked_end)
+
+    prepare_dataset(chunked_start=start, chunked_end=end)
