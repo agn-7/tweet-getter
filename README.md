@@ -9,5 +9,10 @@ There is a dataset contain of 1.3 million tweets in seven categories label (`ang
 ### Data preparation:
 
 ```python
-python3 -m tweet_geter.dataset_maker <start-row-optional> <end-row-optional>
+python -m tweet_geter.dataset_maker <start-row-optional> <end-row-optional>
 ```
+
+---
+[**NOTE**]:
+
+This package is compatible on *Python 3*
