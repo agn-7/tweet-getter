@@ -6,4 +6,8 @@ There is a dataset contain of 1.3 million tweets in seven categories label (`ang
 
 ## Run
 
- 
+### Data preparation:
+
+```python
+python3 -m tweet_geter.dataset_maker <start-row-optional> <end-row-optional>
+```
