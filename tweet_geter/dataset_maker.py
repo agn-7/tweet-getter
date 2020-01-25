@@ -75,12 +75,22 @@ def prepare_dataset(*args, **kwargs):
     chunked_start = kwargs.get('chunked_start', None)
     chunked_end = kwargs.get('chunked_end', None)
 
+    '''Generating Postfix.'''
+    if chunked_start is not None:
+        _start = chunked_start
+        if chunked_end is not None:
+            _end = chunked_end
+        else:
+            _end = 'end'
+    else:
+        _start, _end = 0, 'end'
+
     data = clean_data(chunked_start, chunked_end)
     progress = data.shape[0]
     progress_bar = tqdm(total=progress)
     missing_tweets = 0
 
-    with open('dataset/dataset2.txt', mode='a') as file_:
+    with open(f'dataset/dataset_{_start}_to_{_end}.txt', mode='a') as file_:
         for i, row in data.iterrows():
             id_ = row.iloc[0]
             emotion_ = row.iloc[1]
