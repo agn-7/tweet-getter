@@ -3,17 +3,16 @@ import pandas as pd
 import sys
 
 from tqdm import tqdm
+from configuration.configs import DATA_PREPARATION
+from easydict import EasyDict as edict
 
 __author__ = 'aGn'
 
-API_KEY = "UL3Q8hMA74wRB5RykuCnCJxkm"  # TODO :: Make them parametric.
-API_SECRET = "WJuehel0rp0wPq8T2MdULr3Hxb21DSZfZXI94oqkV6U0zz00Db"
-ACCESS_TOKEN = "1970308164-GCFz3fDbgt95gs9VkbtHi0yzhTN9f8FjfbE2Ciw"
-ACCESS_TOKEN_SECRET = "jZ1KL5BbHlqIEsM4qSqN2fmvu0vN4cIay2vQxy9mE6xgP"
-
-auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
-auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-api = tweepy.API(auth)
+params = edict(DATA_PREPARATION)
+API_KEY = params.api_key
+API_SECRET = params.api_secret
+ACCESS_TOKEN = params.access_token
+ACCESS_TOKEN_SECRET = params.access_token_secret
 
 
 def get_tweet(id_):
@@ -22,6 +21,9 @@ def get_tweet(id_):
     :param id_: tweet's ID.
     :return: tweet text.
     """
+    auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
     tweet = api.get_status(id_)
     tweet_text = remove_symbol(tweet.text, '#')
 
@@ -107,15 +109,11 @@ def prepare_dataset(*args, **kwargs):
     progress_bar.close()
 
 
-if __name__ == '__main__':  # TODO :: Temporarily
-    from configuration.configs import DATA_PREPARATION
-    from easydict import EasyDict as edict
-
+if __name__ == '__main__':
     if len(sys.argv) == 3:
         start = int(sys.argv[1])
         end = int(sys.argv[2])
     else:
-        params = edict(DATA_PREPARATION)
         start = int(params.chunked_start)
         end = int(params.chunked_end)
 
