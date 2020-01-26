@@ -1,3 +1,6 @@
+__author__ = 'aGn'
+
+
 def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, length=100, fill='█',
                        print_end="\r"):
     """
@@ -19,3 +22,14 @@ def print_progress_bar(iteration, total, prefix='', suffix='', decimals=1, lengt
     # Print New Line on Complete
     if iteration == total:
         print()
+
+
+def find_index(*, dataframe, id_):
+    """
+    Find desire index/row by ID.
+    :param id_: ID.
+    :param dataframe: Pandas Dataframe
+    :return: Index.
+    """
+
+    return dataframe.loc[dataframe.id == str(id_)].index[0]
