@@ -131,3 +131,6 @@ dmypy.json
 # Editors
 .vscode/
 .idea/
+
+# Custom
+dataset_*

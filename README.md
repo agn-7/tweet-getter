@@ -12,6 +12,12 @@ There is a dataset contain of 1.3 million tweets in seven categories label (`ang
 python -m tweet_geter.dataset_maker <start-row-optional> <end-row-optional>
 ```
 
+## Installation
+
+```
+pip install -r requirements.txt
+```
+
 ---
 [**NOTE**]:
 
