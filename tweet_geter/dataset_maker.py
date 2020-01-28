@@ -1,6 +1,7 @@
 import tweepy
 import pandas as pd
 import sys
+import os
 
 from tqdm import tqdm
 from configuration.configs import DATA_PREPARATION
@@ -118,3 +119,6 @@ if __name__ == '__main__':
         end = int(params.chunked_end)
 
     prepare_dataset(chunked_start=start, chunked_end=end)
+
+    if params.auto_poweroff:
+        os.system("shutdown now -h")

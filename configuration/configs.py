@@ -9,6 +9,7 @@ DATA_PREPARATION = {
     'access_token_secret': 'jZ1KL5BbHlqIEsM4qSqN2fmvu0vN4cIay2vQxy9mE6xgP',
     'chunked_start': None,
     'chunked_end': None,
+    'auto_poweroff': False,
 }
 
 MODEL_PARAMS = {}
