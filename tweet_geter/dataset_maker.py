@@ -102,9 +102,13 @@ def prepare_dataset(*args, **kwargs):
                 progress_bar.update()
             except KeyboardInterrupt:
                 sys.exit(0)
+            # except tweepy.error.TweepError as exc:  # TODO :: Not yet tested.
+            #     print(exc)
+            #     missing_tweets -=- 1
+            #     # Do some stuff to count missing tweets and managing progress bar here. # TODO
             except Exception as exp:
                 print(exp)
-                missing_tweets -=- 1
+                missing_tweets -=- 1  # TODO
 
     print(f"We missed {missing_tweets} of tweets.")
     progress_bar.close()
