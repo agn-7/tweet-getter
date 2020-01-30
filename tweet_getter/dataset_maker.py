@@ -6,6 +6,7 @@ import os
 from tqdm import tqdm
 from configuration.configs import DATA_PREPARATION
 from easydict import EasyDict as edict
+from time import sleep
 
 __author__ = 'aGn'
 
@@ -126,6 +127,8 @@ if __name__ == '__main__':
     prepare_dataset(chunked_start=start, chunked_end=end)
 
     if params.auto_poweroff:
+        print('Auto Shout Down ...')
+        sleep(10)
         if os.name == 'nt':
             '''Windows'''
             os.system("shutdown /s /t 1")
