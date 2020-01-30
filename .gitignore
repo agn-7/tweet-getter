@@ -133,4 +133,5 @@ dmypy.json
 .idea/
 
 # Custom
-dataset_*
+dataset/dataset*
+configuration/configs.py
