@@ -33,3 +33,12 @@ def find_index(*, dataframe, id_):
     """
 
     return dataframe.loc[dataframe.id == str(id_)].index[0]
+
+
+def line_count(file_):
+    """
+
+    :param file_:
+    :return:
+    """
+    return sum(1 for _ in open(file_))
