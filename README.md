@@ -1,21 +1,25 @@
-# Emotion Detection Based on Context
+# Get Tweets by IDs from Twitter through API.
 
-This is a repository in order to detect emotions based on context and text using a deep neural network approach.
+This application creates the dataset through fetching tweets by their IDs.
 
-There is a dataset contain of 1.3 million tweets in seven categories label (`anger`, `love`, ...)
+There are some policies to avoid tweets content directly. Thus, there are many datasets with just tweets IDs and their labels. Hence, I've prepared an application to fetch these tweets context by their IDs using Twitter API. Consequently, you need a Twitter API Token <sup>[url](http://apps.twitter.com/)</sup>. 
 
-## Run
-
-### Data preparation:
-
-```python
-python -m tweet_getter.dataset_maker <start-row-optional> <end-row-optional>
-```
+In `./dataset` exist is a dataset contained 1.3 million tweets in seven categories label (`anger`, `thankfulness`, `joy`, `sadness`, `fear`, `love`, `surprise`) by their IDs.
 
 ## Installation
 
 ```
 pip install -r requirements.txt
+```
+
+## Configuration
+
+Customize the configuration file (`./configuration/configs.py`)
+
+## Run
+
+```python
+python -m tweet_getter.dataset_maker <start-row-optional> <end-row-optional>
 ```
 
 ---
