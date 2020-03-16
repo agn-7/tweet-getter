@@ -1,8 +1,8 @@
 """
-Emotion Detection Based on Context.
+Get Tweets by its IDs from Twitter through API.
 """
 
-__author__ = 'Mahsa Mozhdehi & Benyamin Jafari'
+__author__ = 'Benyamin Jafari'
 __copyright__ = "Copyright 2020, Planet Earth"
 __version__ = "1.0.1"
 __maintainer__ = "aGn"
