@@ -1,10 +1,10 @@
-# Get Tweets by IDs from Twitter through API.
+# Get Tweets by IDs through Twitter's API.
 
 This application creates the dataset through fetching tweets by their IDs.
 
 There are some policies to avoid tweets content directly. Thus, there are many datasets with just tweets IDs and their labels. Hence, I've prepared an application to fetch these tweets context by their IDs using Twitter API. Consequently, you need a Twitter API Token <sup>[url](http://apps.twitter.com/)</sup>. 
 
-In `./dataset` exist is a dataset contained 1.3 million tweets in seven categories label (`anger`, `thankfulness`, `joy`, `sadness`, `fear`, `love`, `surprise`) by their IDs.
+In `./dataset` directory exist a dataset contains 1.3 million tweets in seven categories label (`anger`, `thankfulness`, `joy`, `sadness`, `fear`, `love`, `surprise`) by their IDs.
 
 ## Installation
 
