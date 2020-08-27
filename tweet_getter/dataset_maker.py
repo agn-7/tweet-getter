@@ -116,7 +116,7 @@ def prepare_dataset(*args, **kwargs):
     progress_bar.close()
 
 
-if __name__ == '__main__':
+def run():  # TODO :: add argparse
     if len(sys.argv) == 3:
         start = int(sys.argv[1])
         end = int(sys.argv[2])
@@ -137,3 +137,7 @@ if __name__ == '__main__':
             os.system("shutdown now -h")
         else:
             os.system("shutdown now -h")
+
+
+if __name__ == '__main__':
+    run()

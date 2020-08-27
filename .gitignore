@@ -135,3 +135,6 @@ dmypy.json
 # Custom
 dataset/dataset*
 configuration/configs.py
+tweet_getter.egg-info
+dist/
+build/
