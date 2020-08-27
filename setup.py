@@ -35,7 +35,7 @@ setup(
         'nlp',
         'natural-language-processing'
     ],
-    download_url='https://github.com/agn-7/tweet-getter/archive/1.0.0rc1.zip',
+    download_url='https://github.com/agn-7/tweet-getter/archive/1.0.0rc2.zip',
     install_requires=[
         'tweepy',
         'pandas',
