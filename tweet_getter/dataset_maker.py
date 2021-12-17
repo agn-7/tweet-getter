@@ -17,6 +17,19 @@ ACCESS_TOKEN = params.access_token
 ACCESS_TOKEN_SECRET = params.access_token_secret
 
 
+def get_likes(id_):  # TODO
+    """
+    # TODO
+    :param id_:
+    :return:
+    """
+    auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
+    likes_count = api.favorites(id_)
+    return likes_count
+
+
 def get_tweet(id_):
     """
     Get tweet through its ID using tweepy library.
@@ -27,6 +40,8 @@ def get_tweet(id_):
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     api = tweepy.API(auth)
     tweet = api.get_status(id_)
+    print(tweet.retweet_count)
+    print(tweet.favorite_count)
     tweet_text = remove_symbol(tweet.text, '#')
 
     return tweet_text
